@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} 
+  Удаление рецепта
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="mb-4">Вы уверены, что хотите удалить?</legend>
+      <h2> Рецепт: {{object}}</h2>
+      {{ form|crispy }}
+    </fieldset>
+    <div class="form-group py-3">
+      <input class="btn btn-outline-danger" type="submit" value="Удалить" />
+      <a class="btn btn-outline-info" style="height: 43px; width: 100px; margin-left: 20px;" href="{% url 'recipes-home' %}">Отмена</a>
+    </div>
+  </form>
+</div>
+
+
+{% endblock content %}

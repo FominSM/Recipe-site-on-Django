@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+
+<div class="card text-center">
+  <div class="card-header">
+    Уведомление
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Уважаемый {{ user.username}}</h5>
+    <p class="card-text">Когда нибудь ты сможешь написать что-нибудь о себе и загрузить свою аватарку, а пока кликай на кнопку ниже</p>
+    <a href="{% url 'recipes-home' %}" class="btn btn-primary">Посмотреть интересные рецепты</a>
+  </div>
+  <div class="card-footer text-muted">
+    работы над сайтом еще ведутся...
+  </div>
+</div>
+
+{% endblock content %}

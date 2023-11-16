@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% extends "recipesapp/base.html" %}
+
+{% block content %}
+
+<h3 style="display: flex; justify-content: center; ">Новые рецепты авторов:</h3>
+
+{% for recipe in recipes %}
+  <div class="card mb-3">
+      <div class="card-body">
+        {% if recipe.photo %}
+            <p><img class="card-img-top" src="{{recipe.photo.url}}"></p>
+        {% endif %}
+        <h5 class="card-title">{{ recipe.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Автор: {{ recipe.author }}</h6>
+        <p class="card-text">Описание: {{ recipe.description }}</p>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Дата публикации: {{ recipe.updated_at|date:"F d, Y" }}
+        </h6>
+        <a href="{% url 'recipes-detail' recipe.pk %}" class="card-link" style="text-decoration: none;">Подробнее</a>
+      </div>
+  </div>
+    {% autoescape on %}
+      {{p.content|linebreaks|truncatewords:50}}
+    {% endautoescape %}
+{% endfor %}
+{% endblock content %}

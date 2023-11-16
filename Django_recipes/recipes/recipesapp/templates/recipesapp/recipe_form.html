@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block title %} 
+  Новый рецепт
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Заполните все поля нового рецепта</legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div class="form-group py-3">
+      <input class="btn btn-outline-primary" type="submit" value="Сохранить" />
+      <a class="btn btn-outline-primary" style="height: 43px; width: 110px; margin-left: 20px;" href="{% url 'recipes-home' %}">Выход</a>
+    </div>
+  </form>
+  
+</div>
+
+{% endblock content %}

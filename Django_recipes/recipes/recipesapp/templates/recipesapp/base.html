@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block title %} 
+      {% if title %}
+        <title>{{title}}</title>
+      {% else %}
+        <title>Сайт рецептов</title>
+      {% endif %}
+    {% endblock %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="../../../media/free-icon-chef-hat-8560938.png" type="image/x-icon">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="nav-link active" style="color: aliceblue;" href="{% url 'recipes-home' %}">Рецепты</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-flex justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active" style="color: aliceblue;" href="{% url 'recipes-create' %}">Добавить рецепт</a>
+              </li>
+                <a href="{% url 'dashboard' %}" class="nav-link active" style="color: aliceblue;">Мой профиль</a>
+                <a  class="nav-link active" style="color: aliceblue;" href="{% url 'logout' %}">Выйти</a>
+              
+              {% else %}
+              <a class="nav-link active" style="color: aliceblue;" href="{% url 'login' %}">Войти</a>
+              <a class="nav-link active" style="color: aliceblue;" href="{% url 'register' %}">Создать аккаунт</a>
+              {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-4 col-8">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% block content %} {% endblock %}
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
